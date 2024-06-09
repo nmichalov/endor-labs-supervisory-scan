@@ -12,12 +12,16 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            repos.csv
+          sparse-checkout-cone-mode: false
       
       - name: Read repos and namespaces from CSV
         id: set-matrix
         run: |
-          matrix={awk -F',' '{print "{\"repo\":\"" $1 "\", \"namespace\":\"" $2 "\"}"}' repos.csv }
+          matrix=${awk -F',' '{print "{\"repo\":\"" $1 "\", \"namespace\":\"" $2 "\"}"}' repos.csv }
 
   
   scan-matrix:
