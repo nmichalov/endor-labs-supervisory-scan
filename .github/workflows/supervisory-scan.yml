@@ -15,9 +15,9 @@ jobs:
         uses: actions/checkout@v3
       
       - name: Read repos and namespaces from CSV
-        id: read-csv
+        id: set-matrix
         run: |
-          awk -F',' '{print "{\"repo\":\"" $1 "\", \"namespace\":\"" $2 "\"}"}' repos.csv | jq -s '.'
+          matrix={awk -F',' '{print "{\"repo\":\"" $1 "\", \"namespace\":\"" $2 "\"}"}' repos.csv | jq -s '.'}
 
   
   scan-matrix:
