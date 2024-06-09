@@ -21,7 +21,7 @@ jobs:
       - name: Read repos and namespaces from CSV
         id: set-matrix
         run: |
-          OUTPUT="$(awk -F',' '{print "{\"repo\":\"" $1 "\", \"namespace\":\"" $2 "\"}"}' repos.csv)"
+          OUTPUT="$(awk -F',' '{print "{\"repo\":\"" $1 "\", \"namespace\":\"" $2 "\"}"}' repos.csv | jq -s '.')"
           # echo "matrix=awk -F',' '{print "{\"repo\":\"" $1 "\", \"namespace\":\"" $2 "\"}"}' repos.csv }"
           echo "matrix=$OUTPUT" >> $GITHUB_OUTPUT
 
