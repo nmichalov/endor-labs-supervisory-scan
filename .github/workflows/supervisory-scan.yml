@@ -1,4 +1,4 @@
-name: Scan Complete Organization
+name: Scan Specified Projects
 on:
   workflow_dispatch:
   # uncomment below and adjust to frequency to automatically run
@@ -6,13 +6,29 @@ on:
   #   - cron: 1 */2 * * *
     
 jobs:
+  # generate_matrix:
+  #   runs-on: ubuntu-latest
+  #   outputs:
+  #     matrix: ${{ steps.set-matrix.outputs.matrix }}
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
+      
+  #       - name: Read repos and namespaces from CSV
+  #         id: read-csv
+  #         run: |
+  #           repos=$(tail -n +2 .github/workflows/repos.csv | awk -F ',' '{print "{\"repo\":\"" $1 "\", \"namespace\":\"" $2 "\"}"}' | tr '\n' ',' | sed 's/,$//')
+  #           matrix="[{\"repo\":\"$(echo $repos | tr ',' '\" , \"')\"]"
+  #           echo "::set-output name=matrix::[$repos]"
+
   
   scan-matrix:
     strategy:
       # fail-fast should be set false so that one scan failure doesn't stop the whole matrix
       fail-fast: false
       max-parallel: 5
-      matrix: {"git-url": ["https://github.com/nmichalov/app-java-demo.git","https://github.com/nmichalov/juice-shop.git"]}
+      matrix: 
+        project-namespace: [["https://github.com/nmichalov/app-java-demo.git","nate-learn.testa"],["https://github.com/nmichalov/juice-shop.git", "nate-learn.testb"]]
     uses: nmichalov/endor-labs-supervisory-scan/.github/workflows/scan-with-endorlabs.yml@main
     permissions:
       id-token: write      # allows authentication to Endor Labs using Actions OIDC JWT Token
@@ -20,5 +36,5 @@ jobs:
       issues: write        # allows scanner to leave a PR comment, if enabled
       contents: read       # allows this job to clone org repos
     with:
-      git-url: ${{ matrix.git-url }}
-      namespace: nate-learn
+      git-url: ${{ matrix.project-namespace[0] }}
+      namespace: ${{ matrix.project-namespace[1] }}
