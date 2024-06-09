@@ -21,7 +21,7 @@ jobs:
       - name: Read repos and namespaces from CSV
         id: set-matrix
         run: |
-          matrix=${awk -F',' '{print "{\"repo\":\"" $1 "\", \"namespace\":\"" $2 "\"}"}' repos.csv }
+          awk -F',' '{print "{\"repo\":\"" $1 "\", \"namespace\":\"" $2 "\"}"}' repos.csv 
 
   
   scan-matrix:
