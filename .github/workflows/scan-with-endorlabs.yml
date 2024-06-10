@@ -43,12 +43,12 @@ on:
         type: string
         default: ".endorlabs/environment"
       runner:
-        description: "Use Endor Labs Container"
-        # description: "Runner to use (default: 'ubuntu-22.04')"
+        # description: "Use Endor Labs Container"
+        description: "Runner to use (default: 'ubuntu-22.04')"
         required: false
         type: string
-        # default: "ubuntu-22.04"
-        default: "us-central1-docker.pkg.dev/endor-ci/public/endorctl:latest"
+        default: "ubuntu-22.04"
+        # default: "us-central1-docker.pkg.dev/endor-ci/public/endorctl:latest"
     secrets:
       endorlabs-api-auth:
         description: "API auth data in the form KEY:SECRET -- if present, disables GitHub Action OIDC auth"
