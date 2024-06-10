@@ -24,6 +24,14 @@ jobs:
           OUTPUT="$(awk -F',' '{print "{\"repo\":\"" $1 "\", \"namespace\":\"" $2 "\"}"}' repos.csv | jq -s '.' | tr '\n' ' ')"
           echo $OUTPUT
           echo "matrix=$OUTPUT" >> $GITHUB_ENV
+  
+  test-things:
+    needs: generate_matrix
+    runs-on: ubuntu-latest
+    steps:
+      - name: check the flow
+        run: |
+          echo $(needs.generate_matrix.outputs.matrix)
 
   scan-matrix:
     needs: generate_matrix
