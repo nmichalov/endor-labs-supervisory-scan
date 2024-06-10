@@ -22,6 +22,7 @@ jobs:
         id: set-matrix
         run: |
           OUTPUT="$(awk -F',' '{print "{\"repo\":\"" $1 "\", \"namespace\":\"" $2 "\"}"}' repos.csv | jq -s '.' | tr '\n' ' ')"
+          echo $OUTPUT
           echo "matrix=$OUTPUT" >> $GITHUB_OUTPUT
 
   scan-matrix:
