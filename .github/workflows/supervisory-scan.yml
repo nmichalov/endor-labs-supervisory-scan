@@ -38,8 +38,6 @@ jobs:
       pull-requests: write   # allows scanner to leave a pull request comment, if enabled
       issues: write          # allows scanner to leave a PR comment, if enabled
       contents: read         # allows this job to clone org repos
-      security-events: write 
-      actions: read
     with:
       git-url: ${{ matrix.projects.repo }}
       namespace: ${{ matrix.projects.namespace }}
