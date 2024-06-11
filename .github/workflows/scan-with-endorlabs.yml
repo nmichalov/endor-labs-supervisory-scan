@@ -129,20 +129,20 @@ jobs:
             echo "ENDOR_GITHUB_ACTION_TOKEN_ENABLE=false" >> $GITHUB_ENV
           fi
       
-      - id: endorlabs-host-check
-        name: perform host check
-        shell: bash
-        run: |
-          LANGUAGES=""
-          "${ENDOR_HOME}/endorctl" host-check --path=project --droid-gpt 2> >(tee "${ENDOR_HOME}/host-check.log" >&2)
-          for lang in $(sed -nr 's/^.*Checking ([a-z_-]+) toolset.*$/\1/p' "${ENDOR_HOME}/host-check.log"); do LANGUAGES="${lang},$LANGUAGES"; done
-          if [[ -n "$LANGUAGES" ]]; then
-            if [[ -z "$ENDOR_SCAN_LANGUAGES" ]]; then
-              # only do this if the repo env hasn't manually set languages
-              # echo "ENDOR_SCAN_LANGUAGES=${LANGUAGES::-1}" >> $GITHUB_ENV  ## TODO: decide if we really want to do this
-              >&2 echo "::notice::Detected languages: ${LANGUAGES::-1}"
-            fi
-          fi
+      # - id: endorlabs-host-check
+      #   name: perform host check
+      #   shell: bash
+      #   run: |
+      #     LANGUAGES=""
+      #     "${ENDOR_HOME}/endorctl" host-check --path=project --droid-gpt 2> >(tee "${ENDOR_HOME}/host-check.log" >&2)
+      #     for lang in $(sed -nr 's/^.*Checking ([a-z_-]+) toolset.*$/\1/p' "${ENDOR_HOME}/host-check.log"); do LANGUAGES="${lang},$LANGUAGES"; done
+      #     if [[ -n "$LANGUAGES" ]]; then
+      #       if [[ -z "$ENDOR_SCAN_LANGUAGES" ]]; then
+      #         # only do this if the repo env hasn't manually set languages
+      #         # echo "ENDOR_SCAN_LANGUAGES=${LANGUAGES::-1}" >> $GITHUB_ENV  ## TODO: decide if we really want to do this
+      #         >&2 echo "::notice::Detected languages: ${LANGUAGES::-1}"
+      #       fi
+      #     fi
 
       - id: endorlabs-scan-ref
         name: scan branch of ${{ inputs.git-url }}
