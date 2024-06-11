@@ -191,6 +191,11 @@ jobs:
       #     path: ${{ env.ENDOR_HOME }}/*.log
       #     if-no-files-found: warn
 
+      - id: check-files
+        name: check for files existence
+        run: |
+          echo ${ls -r}
+
       - id: endorlabs-submit-sarif
         name: submit SARIF output to GitHub
         # env:
