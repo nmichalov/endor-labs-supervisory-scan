@@ -195,7 +195,7 @@ jobs:
       - id: endorlabs-submit-sarif
         name: submit SARIF output to GitHub
         env:
-          GH_TOKEN: ${{ secrets.write_pat }}
+          GH_TOKEN: ${{ secrets.write-to-dashboards }}
         if: inputs.upload-sarif == true
         uses: github/codeql-action/upload-sarif@v3
         continue-on-error: true
