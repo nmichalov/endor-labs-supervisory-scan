@@ -172,25 +172,25 @@ jobs:
           echo "github-run-id=$(echo $CLONE_URL|sed -r 's/[^a-z0-9_-]+/_/g')-${GITHUB_RUN_ID}" >> $GITHUB_OUTPUT
           ls -r
 
-      # - id: endorlabs-upload-json-results
-      #   name: upload scan results as artifacts
-      #   if: inputs.upload-json
-      #   uses: actions/upload-artifact@v4
-      #   continue-on-error: true
-      #   with:
-      #     name: endorlabs-scan-results-${{ steps.endorlabs-scan-ref.outputs.github-run-id }}
-      #     path: ${{ steps.endorlabs-scan-ref.outputs.results-json }}
-      #     if-no-files-found: warn
+      - id: endorlabs-upload-json-results
+        name: upload scan results as artifacts
+        if: inputs.upload-json
+        uses: actions/upload-artifact@v4
+        continue-on-error: true
+        with:
+          name: endorlabs-scan-results-${{ steps.endorlabs-scan-ref.outputs.github-run-id }}
+          path: ${{ steps.endorlabs-scan-ref.outputs.results-json }}
+          if-no-files-found: warn
       
-      # - id: endorlabs-upload-scan-logs
-      #   name: upload scan logs as artifacts
-      #   if: inputs.upload-logs == true
-      #   uses: actions/upload-artifact@v4
-      #   continue-on-error: true
-      #   with:
-      #     name: endorlabs-scan-logs-${{ steps.endorlabs-scan-ref.outputs.github-run-id }}
-      #     path: ${{ env.ENDOR_HOME }}/*.log
-      #     if-no-files-found: warn
+      - id: endorlabs-upload-scan-logs
+        name: upload scan logs as artifacts
+        if: inputs.upload-logs == true
+        uses: actions/upload-artifact@v4
+        continue-on-error: true
+        with:
+          name: endorlabs-scan-logs-${{ steps.endorlabs-scan-ref.outputs.github-run-id }}
+          path: ${{ env.ENDOR_HOME }}/*.log
+          if-no-files-found: warn
 
       - id: endorlabs-submit-sarif
         name: submit SARIF output to GitHub
