@@ -194,12 +194,11 @@ jobs:
 
       - id: endorlabs-submit-sarif
         name: submit SARIF output to GitHub
-        env:
-          GITHUB_TOKEN: ${{ secrets.WRITE_PAT }}
         if: inputs.upload-sarif == true
         uses: github/codeql-action/upload-sarif@v3
         continue-on-error: true
         with:
+          token: ${{ secrets.WRITE_PAT }}
           sarif_file: ${{ steps.endorlabs-scan-ref.outputs.results-sarif }}
           checkout_path: "${{ github.workspace }}/project"
           wait-for-processing: false
