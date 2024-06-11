@@ -194,7 +194,8 @@ jobs:
       - id: check-files
         name: check for files existence
         run: |
-          echo ${ls -r}
+          echo $PWD
+          echo $(ls -r)
 
       - id: endorlabs-submit-sarif
         name: submit SARIF output to GitHub
