@@ -198,7 +198,7 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         continue-on-error: true
         with:
-          token: ${{ secrets.WRITE_PAT }}
+          token: ${{ secrets.write_pat }}
           sarif_file: ${{ steps.endorlabs-scan-ref.outputs.results-sarif }}
           checkout_path: "${{ github.workspace }}/project"
           wait-for-processing: false
