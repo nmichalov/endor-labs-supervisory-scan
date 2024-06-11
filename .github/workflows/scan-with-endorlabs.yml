@@ -23,11 +23,11 @@ on:
       upload-logs:
         description: "upload logs as artifacts (default: false)"
         type: boolean
-        default: false
+        default: true
       upload-json:
         description: "upload json results as artifact (default: false)"
         type: boolean
-        default: false
+        default: true
       upload-sarif:
         description: "upload SARIF results to GitHub for consumption in Security Tab (requires public repo or GHAS license); use only when sidecar-scanning within a repo!"
         type: boolean
