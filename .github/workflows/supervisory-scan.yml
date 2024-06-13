@@ -43,4 +43,4 @@ jobs:
       git-url: ${{ matrix.projects.repo }}
       namespace: ${{ matrix.projects.namespace }}
     secrets:
-      github-action-token: ${{ secrets.REPO_PAT }}
+      github-access-token: ${{ secrets.REPO_PAT }}
