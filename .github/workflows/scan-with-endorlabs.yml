@@ -120,7 +120,7 @@ jobs:
           fi
           mkdir -p "${ENDOR_HOME}"
           curl -o "${ENDOR_HOME}/endorctl" ${ENDOR_API}/download/v1.6.346/endorctl_${ENDOR_OS}_${ENDOR_ARCH}
-          echo "$(curl -s https://api.endorlabs.com/sha/v1.6.346/endorctl_${ENDOR_OS}_${ENDOR_ARCH})  ${ENDOR_HOME}/endorctl" | sha256sum -c || exit 1
+          echo "dbef637e7f068473f0401fd1954e746a706f657e1fedc166aff370be93ece87a  endorctl" | shasum -a 256 --check || exit 1
           chmod +x "${ENDOR_HOME}/endorctl"
           if [[ -n "$ENDORLABS_API_AUTH" ]]; then
             echo "::notice::Disabling GitHub Actions OIDC auth for Endor Labs, using API key auth instead"
