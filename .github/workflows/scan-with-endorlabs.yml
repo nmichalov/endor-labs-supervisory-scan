@@ -104,13 +104,7 @@ jobs:
               exit 1
             fi
           fi
-
-      # - id: endorlabs-checkout
-      #   uses: actions/checkout@v3
-      #   with:
-      #     repository: ${{ inputs.git-url }}
-      #     token: ${{ secrets.github-access-token }}
-        
+   
       - id: endorlabs-setup
         name: install endorlabs client
         shell: bash
