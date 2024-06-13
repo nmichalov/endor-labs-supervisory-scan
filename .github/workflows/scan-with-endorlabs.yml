@@ -89,27 +89,27 @@ jobs:
             exit 2
           fi
 
-      # - id: endorlabs-clone
-      #   name: clone ${{ inputs.git-url }}
-      #   shell: bash
-      #   env:
-      #     CLONE_URL: "https://${{secrets.REPO_PAT}}${{ inputs.git-url }}"
-      #   run: |
-      #     if (git clone "${CLONE_URL}" "project"); then
-      #       >&2 echo "Cloned '${CLONE_URL}' successfully using bare git"
-      #     else
-      #       >&2 echo "Failed to clone '${CLONE_URL}' with bare git, trying gh"
-      #       if ! (gh repo clone "${CLONE_URL}" "project"); then
-      #         echo "::error::unable to clone '${CLONE_URL}' with any supported method"
-      #         exit 1
-      #       fi
-      #     fi
+      - id: endorlabs-clone
+        name: clone ${{ inputs.git-url }}
+        shell: bash
+        env:
+          CLONE_URL: ${{ inputs.git-url }}
+        run: |
+          if (git clone "${CLONE_URL}" "project"); then
+            >&2 echo "Cloned '${CLONE_URL}' successfully using bare git"
+          else
+            >&2 echo "Failed to clone '${CLONE_URL}' with bare git, trying gh"
+            if ! (gh repo clone "${CLONE_URL}" "project"); then
+              echo "::error::unable to clone '${CLONE_URL}' with any supported method"
+              exit 1
+            fi
+          fi
 
-      - id: endorlabs-checkout
-        uses: actions/checkout@v3
-        with:
-          repository: ${{ inputs.git-url }}
-          token: ${{ secrets.github-access-token }}
+      # - id: endorlabs-checkout
+      #   uses: actions/checkout@v3
+      #   with:
+      #     repository: ${{ inputs.git-url }}
+      #     token: ${{ secrets.github-access-token }}
         
       - id: endorlabs-setup
         name: install endorlabs client
