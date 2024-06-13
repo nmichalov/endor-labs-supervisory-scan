@@ -172,7 +172,7 @@ jobs:
             echo "::notice::SARIF output requested for submission to GitHub"
             ENDOR_SCAN_SUMMARY_SARIF_FILE="${PWD}/scan-results.sarif"
           fi
-          "${ENDOR_HOME}/endorctl" scan --path ./project --bypass-host-check --run-in-sandbox --enable-tool-chains --build --verbose 2> >(tee "${ENDOR_HOME}/default-scan.log" >&2) > "${ENDOR_HOME}/scan-results-${GITHUB_RUN_ID}.json"
+          "${ENDOR_HOME}/endorctl" scan --path ./project --bypass-host-check --build --verbose 2> >(tee "${ENDOR_HOME}/default-scan.log" >&2) > "${ENDOR_HOME}/scan-results-${GITHUB_RUN_ID}.json"
           echo "results-json=${ENDOR_HOME}/scan-results-${GITHUB_RUN_ID}.json" >> $GITHUB_OUTPUT
           echo "results-sarif=$ENDOR_SCAN_SUMMARY_SARIF_FILE" >> $GITHUB_OUTPUT
           echo "github-run-id=$(echo $CLONE_URL|sed -r 's/[^a-z0-9_-]+/_/g')-${GITHUB_RUN_ID}" >> $GITHUB_OUTPUT
