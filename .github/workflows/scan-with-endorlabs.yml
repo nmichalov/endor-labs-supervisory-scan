@@ -59,7 +59,7 @@ on:
 jobs:
   endorlabs-auto-scan:
     runs-on: ${{ inputs.runner }}
-    container: us-central1-docker.pkg.dev/endor-ci/public/endorctl:pr-14299-9548536735
+    container: us-central1-docker.pkg.dev/endor-ci/public/endorctl:latest
     permissions:
       id-token: write      # allows authentication to Endor Labs using Actions OIDC JWT Token
       contents: read       # allows this job to clone org repos
