@@ -62,7 +62,7 @@ jobs:
     container: 
       image: us-central1-docker.pkg.dev/endor-ci/public/endorctl:latest
       env:
-        GITHUB_TOKEN: ${{ secrets.github_access_token || github.token }}
+        GH_TOKEN: ${{ secrets.github_access_token || github.token }}
     permissions:
       id-token: write      # allows authentication to Endor Labs using Actions OIDC JWT Token
       contents: read       # allows this job to clone org repos
