@@ -171,7 +171,7 @@ jobs:
             ENDOR_SCAN_SUMMARY_SARIF_FILE="${PWD}/scan-results.sarif"
           fi
           # "${ENDOR_HOME}/endorctl" scan --path ./project --run-in-sandbox --build --verbose 2> >(tee "${ENDOR_HOME}/default-scan.log" >&2) > "${ENDOR_HOME}/scan-results-${GITHUB_RUN_ID}.json"
-          "${ENDOR_HOME}/endorctl" scan --path ./project --build --verbose --debug=true #2> >(tee "${ENDOR_HOME}/default-scan.log" >&2) > "${ENDOR_HOME}/scan-results-${GITHUB_RUN_ID}.json"
+          "${ENDOR_HOME}/endorctl" scan --path ./project --build --verbose --log-level=debug #2> >(tee "${ENDOR_HOME}/default-scan.log" >&2) > "${ENDOR_HOME}/scan-results-${GITHUB_RUN_ID}.json"
           echo "results-json=${ENDOR_HOME}/scan-results-${GITHUB_RUN_ID}.json" >> $GITHUB_OUTPUT
           echo "results-sarif=$ENDOR_SCAN_SUMMARY_SARIF_FILE" >> $GITHUB_OUTPUT
           echo "github-run-id=$(echo $CLONE_URL|sed -r 's/[^a-z0-9_-]+/_/g')-${GITHUB_RUN_ID}" >> $GITHUB_OUTPUT
